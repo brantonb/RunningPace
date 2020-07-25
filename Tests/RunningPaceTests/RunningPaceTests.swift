@@ -8,8 +8,4 @@ final class RunningPaceTests: XCTestCase {
         // results.
         XCTAssertEqual(RunningPace().text, "Hello, World!")
     }
-
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }
