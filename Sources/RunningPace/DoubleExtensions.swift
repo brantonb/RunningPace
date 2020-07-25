@@ -4,6 +4,14 @@ public extension Double {
 
     // MARK: Distance
 
+    var feet: Distance {
+        return Distance(value: self, unit: .feet)
+    }
+
+    var yards: Distance {
+        return Distance(value: self, unit: .yards)
+    }
+
     var miles: Distance {
         return Distance(value: self, unit: .miles)
     }
