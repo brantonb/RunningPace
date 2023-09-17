@@ -1,0 +1,17 @@
+name: Swift
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Lint
+      run: swiftlint --reporter github-actions-logging --strict
+    - name: Test
+      run: swift test -v
+    - name: Debug Build
+      run: swift build -v -c debug
+    - name: Release Build
+      run: swift build -v -c release
