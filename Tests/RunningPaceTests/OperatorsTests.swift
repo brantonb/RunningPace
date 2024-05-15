@@ -184,17 +184,13 @@ final class OperatorsTests: XCTestCase {
     }
 }
 
-private func assertEqualSpeeds(_ expected: Speed, _ actual: Speed,
-                               file: StaticString = #file, line: UInt = #line) {
+private func assertEqualSpeeds(_ expected: Speed, _ actual: Speed) {
     let expectedMetersPerSecond = expected.converted(to: .metersPerSecond).value
     let actualMetersPerSecond = actual.converted(to: .metersPerSecond).value
-    if fabs(expectedMetersPerSecond - actualMetersPerSecond) >= 0.00001 {
-        XCTFail("\(expected) is not equal to \(actual)", file: file, line: line)
-    }
+    XCTAssertEqual(expectedMetersPerSecond, actualMetersPerSecond, accuracy: 0.00001)
 }
 
-private func assertEqualDistances(_ expected: Distance, _ actual: Distance,
-                                  file: StaticString = #file, line: UInt = #line) {
+private func assertEqualDistances(_ expected: Distance, _ actual: Distance) {
   #if os(Linux)
     let tolerance = 0.01
   #else
@@ -202,13 +198,10 @@ private func assertEqualDistances(_ expected: Distance, _ actual: Distance,
   #endif
     let expectedMeters = expected.converted(to: .meters).value
     let actualMeters = actual.converted(to: .meters).value
-    if fabs(expectedMeters - actualMeters) >= tolerance {
-        XCTFail("\(expected) is not equal to \(actual)", file: file, line: line)
-    }
+    XCTAssertEqual(expectedMeters, actualMeters, accuracy: tolerance)
 }
 
-private func assertEqualDurations(_ expected: Duration, _ actual: Duration,
-                                  file: StaticString = #file, line: UInt = #line) {
+private func assertEqualDurations(_ expected: Duration, _ actual: Duration) {
   #if os(Linux)
     let tolerance = 0.01
   #else
@@ -216,7 +209,6 @@ private func assertEqualDurations(_ expected: Duration, _ actual: Duration,
   #endif
     let expectedSeconds = expected.converted(to: .seconds).value
     let actualSeconds = actual.converted(to: .seconds).value
-    if fabs(expectedSeconds - actualSeconds) >= tolerance {
-        XCTFail("\(expected) is not equal to \(actual)", file: file, line: line)
-    }
+    XCTAssertEqual(expectedSeconds, actualSeconds, accuracy: tolerance)
+}
 }

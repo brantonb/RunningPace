@@ -50,7 +50,5 @@ private func assertEqualSpeeds(_ expected: Speed, _ actual: Speed, file: StaticS
     let tolerance = 0.00001
     let expectedMetersPerSecond = expected.converted(to: .metersPerSecond).value
     let actualMetersPerSecond = actual.converted(to: .metersPerSecond).value
-    if fabs(expectedMetersPerSecond - actualMetersPerSecond) >= tolerance {
-        XCTFail("\(expected) is not equal to \(actual)", file: file, line: line)
-    }
+    XCTAssertEqual(expectedMetersPerSecond, actualMetersPerSecond, accuracy: tolerance)
 }
