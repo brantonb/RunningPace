@@ -1,5 +1,5 @@
 import XCTest
-import RunningPace
+@testable import RunningPace
 
 final class OperatorsTests: XCTestCase {
 
@@ -64,6 +64,8 @@ final class OperatorsTests: XCTestCase {
     }
 
     func testMultiplyingSpeedByDurationHasProperUnits() {
+        let secondsPerMeter = UnitSpeed(symbol: "\(UnitDuration.seconds.symbol)/\(UnitLength.meters.symbol)",
+                                        converter: UnitConverterInverse(constant: 0.277778))
         let conversions: [(unitSpeed: UnitSpeed, unitLength: UnitLength)] = [
             (.minutesPerMile, .miles),
             (.milesPerHour, .miles),
@@ -73,6 +75,9 @@ final class OperatorsTests: XCTestCase {
 
             (.knots, .nauticalMiles),
             (.metersPerSecond, .meters),
+
+            // Default should be kilometers for any unknown types like this custom one
+            (secondsPerMeter, .kilometers),
         ]
 
         for (unitSpeed, unitLength) in conversions {
@@ -211,4 +216,8 @@ private func assertEqualDurations(_ expected: Duration, _ actual: Duration) {
     let actualSeconds = actual.converted(to: .seconds).value
     XCTAssertEqual(expectedSeconds, actualSeconds, accuracy: tolerance)
 }
+
+private extension UnitSpeed {
+    static let secondsPerMeter = UnitSpeed(symbol: "\(UnitDuration.seconds.symbol)/\(UnitLength.meters.symbol)",
+                                           converter: UnitConverterInverse(constant: 0.277778))
 }

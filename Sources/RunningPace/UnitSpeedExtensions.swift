@@ -8,7 +8,7 @@ public extension UnitSpeed {
                                                converter: UnitConverterInverse(constant: 16.666666666667))
 }
 
-private class UnitConverterInverse: UnitConverter {
+class UnitConverterInverse: UnitConverter {
     let constant: Double
 
     init(constant: Double) {
