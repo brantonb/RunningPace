@@ -47,7 +47,7 @@ final class OperatorsTests: XCTestCase {
         ]
 
         for (unitLength, unitSpeed) in conversions {
-            let speed = 10.minutes / Measurement(value: 1, unit: unitLength)
+            let speed = 600.seconds / Measurement(value: 1, unit: unitLength)
             XCTAssertEqual(unitSpeed, speed.unit)
         }
     }
