@@ -7,8 +7,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Install Mint
+      run: brew install mint
     - name: Lint
-      run: swiftlint --reporter github-actions-logging --strict
+      run: mint run swiftlint --reporter github-actions-logging --strict
     - name: Test
       run: swift test -v
     - name: Debug Build
